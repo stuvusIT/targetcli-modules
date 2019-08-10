@@ -81,14 +81,14 @@ def main():
                     if row_data[1] == "luns":
                         continue
                     luns[row_data[5][1:]] = row_data[3][3:]
-                if state == 'present' and luns.has_key(lun_path):
+                if state == 'present' and lun_path in luns:
                     # LUN is already there and present
                     result['changed'] = False
                     result['lun_id'] = luns[lun_path]
-                elif state == 'absent' and not luns.has_key(lun_path):
+                elif state == 'absent' and not lun_path in luns:
                     # LUN is not there and should not be there
                     result['changed'] = False
-                elif state == 'present' and not luns.has_key(lun_path):
+                elif state == 'present' and not lun_path in luns:
                     # create LUN
                     if module.check_mode:
                         module.exit_json(changed=True)
@@ -99,7 +99,7 @@ def main():
                         else:
                             module.fail_json(msg="Failed to create iSCSI LUN object")
 
-                elif state == 'absent' and luns.has_key(lun_path):
+                elif state == 'absent' and lun_path in luns:
                     # delete LUN
                     if module.check_mode:
                         module.exit_json(changed=True)

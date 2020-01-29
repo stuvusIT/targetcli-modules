@@ -65,7 +65,7 @@ def main():
             module.fail_json(msg="'targetcli' executable not found. Install 'targetcli'.")
 
         result = {}
-        
+
         try:
             rc, out, err = module.run_command("targetcli '/iscsi/%(wwn)s/tpg1/portals/%(ip)s:%(port)s status'" % module.params)
             if rc == 0 and state == 'present':

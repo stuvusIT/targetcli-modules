@@ -61,7 +61,7 @@ def main():
 
         result = {}
         luns = {}
-        
+
         try:
             # check if the iscsi target exists
             rc, out, err = module.run_command("targetcli '/iscsi/%(wwn)s/tpg1 status'" % module.params)
@@ -70,7 +70,7 @@ def main():
                 module.fail_json(msg="ISCSI object doesn't exists")
             elif rc != 0 and state == 'absent':
                 result['changed'] = False
-                # ok iSCSI object doesn't exist so LUN is also not there --> success 
+                # ok iSCSI object doesn't exist so LUN is also not there --> success
             else:
                 # lets parse the list of LUNs from the targetcli
                 rc, output, err = module.run_command("targetcli '/iscsi/%(wwn)s/tpg1/luns ls'" % module.params)

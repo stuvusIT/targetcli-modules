@@ -64,7 +64,7 @@ def main():
             module.fail_json(msg="'targetcli' executable not found. Install 'targetcli'.")
 
         result = {}
-        
+
         try:
             rc, out, err = module.run_command("targetcli '/backstores/{backstore_type}/{backstore_name} status'".format(**module.params))
             if rc == 0 and state == 'present':

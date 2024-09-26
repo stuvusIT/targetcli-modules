@@ -43,7 +43,7 @@ remove iSCSI LUN
 - targetcli_iscsi_lun: wwn=iqn.1994-05.com.redhat:hell backstopre_type=block backstore_name=test2 state=absent
 '''
 
-from distutils.spawn import find_executable
+from shutil import which
 
 def main():
         module = AnsibleModule(

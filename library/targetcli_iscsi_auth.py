@@ -56,7 +56,7 @@ set userid and password as well as mutual userid and password
 
 '''
 
-from distutils.spawn import find_executable
+from shutil import which
 import re
 
 
@@ -72,7 +72,7 @@ def main():
     ),
     supports_check_mode=True)
 
-  if find_executable('targetcli') is None:
+  if which('targetcli') is None:
     module.fail_json(msg="'targetcli' executable not found. Install 'targetcli'.")
 
   try:

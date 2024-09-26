@@ -46,7 +46,7 @@ remove the portal
 - targetcli_iscsi_portal: wwn=iqn.2003-01.org.linux-iscsi.storage01.x8664:portaltest ip=192.168.178.55 port=2881 state=absent
 '''
 
-from distutils.spawn import find_executable
+from shutil import which
 
 def main():
         module = AnsibleModule(
@@ -61,7 +61,7 @@ def main():
 
         state = module.params['state']
 
-        if find_executable('targetcli') is None:
+        if which('targetcli') is None:
             module.fail_json(msg="'targetcli' executable not found. Install 'targetcli'.")
 
         result = {}

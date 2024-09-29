@@ -33,7 +33,7 @@ remove existing target
 - targetcli_iscsi: wwn=iqn.1994-05.com.redhat:hell state=absent
 '''
 
-from distutils.spawn import find_executable
+from shutil import which
 
 def main():
         module = AnsibleModule(
@@ -47,7 +47,7 @@ def main():
         wwn = module.params['wwn']
         state = module.params['state']
 
-        if find_executable('targetcli') is None:
+        if which('targetcli') is None:
             module.fail_json(msg="'targetcli' executable not found. Install 'targetcli'.")
 
         result = {}
